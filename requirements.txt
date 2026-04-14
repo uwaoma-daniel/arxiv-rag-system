@@ -1,0 +1,37 @@
+accelerate==0.34.2
+bitsandbytes==0.41.3
+chromadb==0.6.3
+fastapi==0.109.0
+huggingface_hub==0.36.2
+langchain==0.2.16
+langchain-community==0.2.16
+langchain-core==0.2.43
+langchain-huggingface==0.0.1
+nltk==3.8.1
+numpy==1.26.4
+pyarrow==23.0.1
+pydantic==2.12.3
+PyYAML==6.0.1
+qdrant-client==1.7.0
+ragas==0.1.7
+rouge_score==0.1.2
+sentence-transformers==5.4.0
+torch==2.10.0+cu128
+tqdm==4.66.3
+transformers==4.57.6
+uvicorn==0.27.0
+
+# ── API / Frontend (not pulled in by above) ───────────────
+requests==2.31.0
+streamlit==1.30.0
+python-multipart==0.0.9
+python-dotenv==1.0.0
+
+# ── Testing ───────────────────────────────────────────────
+pytest==7.4.4
+pytest-cov==4.1.0
+
+# ── Visualization ─────────────────────────────────────────
+matplotlib==3.8.2
+seaborn==0.13.1
+plotly==5.18.0

@@ -1,0 +1,68 @@
+# ── RAG System Configuration ──────────────────────────────
+# Sections match what src/ modules actually read.
+# Override sensitive values via environment variables.
+
+vector_store:
+  type: chroma                        # chroma | qdrant
+  chroma_persist_dir: ./chroma_db
+  qdrant_collection: arxiv_abstracts
+  qdrant_url: ""                      # set via QDRANT_URL env var
+  qdrant_api_key: ""                  # set via QDRANT_API_KEY env var
+
+embedding:
+  model_name: sentence-transformers/all-MiniLM-L6-v2
+  device: auto                        # auto | cuda | cpu
+  batch_size: 64
+  dimensions: 384
+
+chunking:
+  similarity_threshold: 0.65
+  min_chunk_tokens: 50
+  max_chunk_tokens: 200
+  overlap_sentences: 1
+
+indexing:
+  total_target: 10000
+  buffer_factor: 1.2
+  doc_batch_size: 100
+  embed_batch_size: 64
+  checkpoint_interval: 1000
+  date_start: '2018-01-01'
+  date_end: '2024-12-31'
+  categories:
+    cs.AI: 0.20
+    cs.LG: 0.20
+    cs.CL: 0.15
+    cs.CV: 0.15
+    stat.ML: 0.10
+    cs.IR: 0.10
+    cs.NE: 0.05
+    cs.RO: 0.05
+
+llm:
+  mode: auto                          # auto | local | api | fallback
+  primary: mistralai/Mistral-7B-Instruct-v0.2
+  fallback: google/flan-t5-large
+  max_new_tokens: 800
+  temperature: 0.1
+  load_in_4bit: true                  # bitsandbytes NF4 on GPU
+
+retrieval:
+  top_k: 5
+  candidate_k: 10                     # fetch 10, MMR-rerank to top_k
+  mmr_lambda: 0.7
+  score_threshold: 0.30
+
+api:
+  host: 0.0.0.0
+  port: 8000
+  rate_limit: 10                      # requests per minute per IP
+  max_sessions: 100
+  session_ttl_minutes: 30
+  max_turns: 6
+
+logging:
+  level: INFO
+  file: logs/rag_system.log
+  max_bytes: 10485760                 # 10MB
+  backup_count: 3
